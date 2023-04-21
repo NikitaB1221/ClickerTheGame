@@ -8,6 +8,15 @@ body {
     background-size: 100%;
 }
 
+.entityContainer{
+    position: absolute;
+    display: flex;
+    height: 75px;
+    width: 100px;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
 
 .Entity{
     position: absolute;
@@ -15,6 +24,7 @@ body {
     width: 65px;
     background-color: rgb(0, 255, 0);
     z-index: 2;
+    margin-top: 20px;
 }
 
 @keyframes EntityMoveSet1 {
