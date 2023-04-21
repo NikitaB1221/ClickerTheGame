@@ -1,0 +1,62 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background-color: rgb(110, 110, 124);
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+
+.Entity{
+    position: absolute;
+    height: 65px;
+    width: 65px;
+    background-color: rgb(0, 255, 0);
+    z-index: 2;
+}
+
+@keyframes EntityMoveSet1 {
+    0%{
+        top: 5%;
+        right: 15%;
+    }
+    33%
+    {
+        top: 30%;
+        right: 25%;
+    }
+    67%
+    {
+        top: 45%;
+        right: 10%;
+    }
+    100%
+    {
+        top: 80%;
+        right: 15%;
+    }
+}
+
+@keyframes EntityMoveSet2 {
+    0%{
+        top: 80%;
+        left: 40%;
+    }
+    33%
+    {
+        top: 60%;
+        left: 35%;
+    }
+    67%
+    {
+        top: 40%;
+        right: 50%;
+    }
+    100%
+    {
+        top: 10%;
+        left: 45%; 
+    }
+}
