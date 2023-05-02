@@ -15,10 +15,7 @@ const playButtonClick = () => {
     document.getElementById('startWindow').style.display = "none";
 };
 
-window.onload=function(){
-    let pB = document.getElementById('playButton');
-    pB.addEventListener("click", playButtonClick);
-}
+document.getElementById('playButton').addEventListener("click", playButtonClick);
 
 
 const SaveResult = () => {

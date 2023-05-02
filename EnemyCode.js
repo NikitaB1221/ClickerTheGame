@@ -22,11 +22,11 @@ function CreateEnemy1(){
     const prBar = document.createElement('progress');
     prBar.setAttribute('max','100');
     prBar.setAttribute('value','100');
-    enemyConytainer.append(prBar);
+    enemyContainer.append(prBar);
 
     const entity = document.createElement('div');
     entity.classList.add('Entity');
-    enemyConytainer.append(entity);
+    enemyContainer.append(entity);
 }
 
 for(let i = 0; i < Math.floor(Math.random()*100 % 5 + 1); i++){
