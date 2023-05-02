@@ -1,0 +1,80 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+
+.levelOneWindow{
+    position: absolute;
+    z-index: 9;
+    width: 100%;
+    height: 100%;
+    background-color: gray;
+}
+
+
+.entityContainer{
+    position: absolute;
+    display: flex;
+    z-index: 9;
+    height: 75px;
+    width: 100px;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.Entity{
+    position: absolute;
+    height: 65px;
+    width: 65px;
+    background-color: rgb(0, 255, 0);
+    z-index: 2;
+    margin-top: 20px;
+}
+
+@keyframes EntityMoveSet1 {
+    0%{
+        top: 5%;
+        right: 15%;
+    }
+    33%
+    {
+        top: 30%;
+        right: 25%;
+    }
+    67%
+    {
+        top: 45%;
+        right: 10%;
+    }
+    100%
+    {
+        top: 80%;
+        right: 15%;
+    }
+}
+
+@keyframes EntityMoveSet2 {
+    0%{
+        top: 80%;
+        left: 40%;
+    }
+    33%
+    {
+        top: 60%;
+        left: 35%;
+    }
+    67%
+    {
+        top: 40%;
+        right: 50%;
+    }
+    100%
+    {
+        top: 10%;
+        left: 45%; 
+    }
+}

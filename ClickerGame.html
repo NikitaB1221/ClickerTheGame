@@ -3,23 +3,23 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./Style.css">
+    <link rel="stylesheet" href="./StartWindowStyle.css">
+    <link rel="stylesheet" href="./levelOneWindow.css">
     <script src="StartWindowCode.js"></script>
     <script src="EnemyCode.js"></script>
 </head>
 
 <body>
-    
-    <div class="entityContainer" style="top: 5%; right: 15%; animation: 6.5s EntityMoveSet1 infinite alternate;">
-        <progress id='hpBar0' max="100" value="100"></progress>
-        <div id='Entity0' class="Entity"></div>
+
+    <div id="startWindow" class="startWindow">
+        <textarea id="usenameTextArea" class="usenameTextArea" placeholder="Enter username..."></textarea>
+        <button id="playButton" class="playButton">PLAY</button>
     </div>
 
-        
-    <div class="entityContainer" style="top: 80%; left: 40%; animation: 10s EntityMoveSet1 infinite alternate;">
-        <progress id='hpBar1' max="100" value="100"></progress>
-        <div id='Entity1' class="Entity"></div>
+    <div id="levelOneWindow" class="levelOneWindow">
+
     </div>
+    
 
 </body>
 
