@@ -79,7 +79,7 @@ class Enemy1 {
     }
 }
 
-for (let i = 0; i < Math.floor(Math.random() * 100 % 5 + 1); i++) {
+for (let i = 0; i < Math.floor(Math.random() * 100 % 5 + 2); i++) {
     new Enemy1().Create();
 }
 
