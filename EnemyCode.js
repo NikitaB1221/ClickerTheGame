@@ -2,6 +2,7 @@
 
 let timer = 0;
 
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
@@ -13,7 +14,31 @@ function EnemyDamage() {
 }
 
 function IsNewLevel() {
-    if (document.body.querySelectorAll('.entityContainer').length === 0) document.body.style.backgroundColor = 'red';
+
+    if (document.body.querySelectorAll('.entityContainer').length === 0 && lvlCount <= 3) lvlCount++;
+
+    if (document.body.querySelectorAll('.entityContainer').length === 0) {
+        switch (lvlCount) {
+            case 1:
+                document.body.style.backgroundColor = 'forestgreen';
+                for (let i = 0; i < Math.floor(Math.random() * 100 % 3 + lvlCount); i++) {
+                    new Enemy1().Create();
+                }
+                break;
+            case 2:
+                document.body.style.backgroundColor = 'gray';
+                for (let i = 0; i < Math.floor(Math.random() * 100 % 4 +  lvlCount); i++) {
+                    new Enemy1().Create();
+                }
+                break;
+            case 3:
+                document.body.style.backgroundColor = 'brown';
+                for (let i = 0; i < Math.floor(Math.random() * 100 % 5 + lvlCount); i++) {
+                    new Enemy1().Create();
+                }
+                break;
+        }
+    }
 }
 
 function PlayerDamage() {
@@ -30,12 +55,12 @@ function AttackTime() {
             attackMarker.style.width = '85px';
             attackMarker.style.transform = 'translate(-10px, -10px)';
             attackMarker.style.opacity = '0.8';
-            attackMarker.style.position='absolute';
-            attackMarker.style.zIndex='20';
+            attackMarker.style.position = 'absolute';
+            attackMarker.style.zIndex = '20';
             attackMarker.style.backgroundColor = 'red';
             enemyList[i].childNodes[1].append(attackMarker);
         }
-        else if(enemyList[i].getAttribute('atCd') % timer !== 0 && enemyList[i].childNodes[1].childNodes.length > 0){
+        else if (enemyList[i].getAttribute('atCd') % timer !== 0 && enemyList[i].childNodes[1].childNodes.length > 0) {
             enemyList[i].childNodes[1].removeChild(enemyList[i].childNodes[1].lastChild)
         }
     }
@@ -69,28 +94,22 @@ class Enemy1 {
         const entity = document.createElement('div');
         entity.classList.add('Entity');
         entity.style.backgroundImage = 'url(en1.gif)';
-        entity.style.backgroundSize='contain';
+        entity.style.backgroundSize = 'contain';
 
         let colorString = 'hue-rotate(' + Math.floor(Math.random() * 1000 % 361) + 'deg)';
 
-        entity.style.filter=colorString;
+        entity.style.filter = colorString;
         enemyContainer.append(entity);
         entity.addEventListener('click', PlayerDamage);
     }
 }
 
-for (let i = 0; i < Math.floor(Math.random() * 100 % 5 + 2); i++) {
-    new Enemy1().Create();
+function WeaponAnimCansel() {
+    document.getElementById('weapon').src = 'w1.png';
 }
 
-function WeaponAnimCansel(){
-    document.getElementById('weapon').src='w1.png';
-}
-
-function WeaponAnim(){
-    document.getElementById('weapon').src='w1.gif';
+function WeaponAnim() {
+    document.getElementById('weapon').src = 'w1.gif';
     let tmpTimer = setTimeout(WeaponAnimCansel, 380);
-    
-}
 
-document.body.addEventListener('click', WeaponAnim)
+}

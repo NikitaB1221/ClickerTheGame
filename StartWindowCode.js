@@ -1,10 +1,11 @@
 "use strict";
 let username, score = "";
 let userDMG = 20;
+let lvlCount = 0;
 
 const palyButtonClick = () =>{
     if(usenameTextArea.value === "" || usenameTextArea.value === " ") {
-        postMessage("Username can't be empty!")
+        alert("Username can't be empty!");
         return; }
     
     username = usenameTextArea.value;   
@@ -13,6 +14,9 @@ const palyButtonClick = () =>{
     usenameTextArea.style.display = "none";
     playButton.style.display = "none";
     startWindow.style.display = "none";
+
+    document.body.addEventListener('click', WeaponAnim);
+    IsNewLevel();
 }
 
 var pB = document.getElementById('playButton');

@@ -53,24 +53,24 @@ body {
     }
     100%
     {
-        top: 80%;
+        top: 60%;
         right: 15%;
     }
 }
 
 @keyframes EntityMoveSet2 {
     0%{
-        top: 80%;
+        top: 60%;
         left: 40%;
     }
     33%
     {
-        top: 60%;
+        top: 40%;
         left: 35%;
     }
     67%
     {
-        top: 40%;
+        top: 20%;
         right: 50%;
     }
     100%
