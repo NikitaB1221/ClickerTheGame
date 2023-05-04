@@ -1,5 +1,6 @@
 "use strict";
 
+let shieldUp = false;
 let timer = 0;
 
 
@@ -8,7 +9,7 @@ function getRandomInt(max) {
 }
 
 function EnemyDamage() {
-    this.childNodes[0].setAttribute('value', this.childNodes[0].getAttribute('value') - 20);
+    if(shieldUp === false) this.childNodes[0].setAttribute('value', this.childNodes[0].getAttribute('value') - 20);
     if (this.childNodes[0].getAttribute('value') < 1) this.remove();
     IsNewLevel();
 }
@@ -104,6 +105,9 @@ class Enemy1 {
     }
 }
 
+
+
+
 function WeaponAnimCansel() {
     document.getElementById('weapon').src = 'w1.png';
 }
@@ -113,3 +117,24 @@ function WeaponAnim() {
     let tmpTimer = setTimeout(WeaponAnimCansel, 380);
 
 }
+
+
+document.body.addEventListener('keydown', function(event){
+    let shield = document.getElementById('shield');
+    if(event.key === 'Shift') {
+        shield.src='ws2.png';
+        shield.style.left='25%';
+        document.getElementById('weapon').hidden=true;
+        shieldUp = true;
+    }
+});
+
+document.body.addEventListener('keyup', function(event){
+    let shield = document.getElementById('shield');
+    if(event.key === 'Shift') {
+        shield.src='ws1.png';
+        shield.style.left='5%';
+        document.getElementById('weapon').hidden=false;
+        shieldUp = false;
+    }
+});

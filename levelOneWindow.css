@@ -27,14 +27,38 @@ body {
     margin-top: 20px;
 }
 
-#weapon{
+
+
+
+
+.weapon{
     position: absolute;
     bottom: 0%;
     right: 15%;
     width: 200px; 
-    height: 200px;
+    height: 250px;
     z-index: 9;
 }
+
+.shield{
+    position: absolute;
+    bottom: 0%;
+    left: 5%;
+    z-index: 9;
+}
+
+.userHpBar{
+    position: absolute;
+    bottom: 1%;
+    right: calc(50% - 400px);
+    width: 400px; 
+    height: 40px;
+    z-index: 9;
+}
+
+
+
+
 
 @keyframes EntityMoveSet1 {
     0%{
