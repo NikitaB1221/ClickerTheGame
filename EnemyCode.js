@@ -30,6 +30,8 @@ function AttackTime() {
             attackMarker.style.width = '85px';
             attackMarker.style.transform = 'translate(-10px, -10px)';
             attackMarker.style.opacity = '0.8';
+            attackMarker.style.position='absolute';
+            attackMarker.style.zIndex='20';
             attackMarker.style.backgroundColor = 'red';
             enemyList[i].childNodes[1].append(attackMarker);
         }
@@ -47,7 +49,7 @@ class Enemy1 {
         let PosX = "top: " + Math.floor(Math.random() * 100 % 50) + "%;";
         let PosY = "right: " + Math.floor(Math.random() * 100 % 50) + "%;";
         let MoveSet = "EntityMoveSet" + Math.floor(Math.random() * 10 % 2 + 1);
-        let AnimData = "animation: " + Math.floor((Math.random() * 100 % 5) + 2) + "s " + MoveSet + " infinite alternate;";
+        let AnimData = "animation: " + Math.floor((Math.random() * 100 % 4) + 1) + "s " + MoveSet + " infinite alternate;";
 
         const enemyContainer = document.createElement('div');
         enemyContainer.classList.add('entityContainer');
@@ -66,19 +68,29 @@ class Enemy1 {
 
         const entity = document.createElement('div');
         entity.classList.add('Entity');
+        entity.style.backgroundImage = 'url(en1.gif)';
+        entity.style.backgroundSize='contain';
+
+        let colorString = 'hue-rotate(' + Math.floor(Math.random() * 1000 % 361) + 'deg)';
+
+        entity.style.filter=colorString;
         enemyContainer.append(entity);
         entity.addEventListener('click', PlayerDamage);
     }
 }
 
-// function CreateEnemy1() {
-
-
-
-
-
-// }
-
 for (let i = 0; i < Math.floor(Math.random() * 100 % 5 + 1); i++) {
     new Enemy1().Create();
 }
+
+function WeaponAnimCansel(){
+    document.getElementById('weapon').src='w1.png';
+}
+
+function WeaponAnim(){
+    document.getElementById('weapon').src='w1.gif';
+    let tmpTimer = setTimeout(WeaponAnimCansel, 380);
+    
+}
+
+document.body.addEventListener('click', WeaponAnim)
