@@ -3,41 +3,33 @@
 let shieldUp = false;
 let timer = 0;
 
-
-function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-}
-
 function EnemyDamage() {
-    if(shieldUp === false) this.childNodes[0].setAttribute('value', this.childNodes[0].getAttribute('value') - 20);
+    if (shieldUp === false) this.childNodes[0].setAttribute('value', this.childNodes[0].getAttribute('value') - 20);
     if (this.childNodes[0].getAttribute('value') < 1) this.remove();
     IsNewLevel();
 }
 
 function IsNewLevel() {
 
-    if (document.body.querySelectorAll('.entityContainer').length === 0 && lvlCount <= 3) lvlCount++;
-
     if (document.body.querySelectorAll('.entityContainer').length === 0) {
+
+        lvlCount++;
+        if (lvlCount > 3) lvlCount = 1;
+
         switch (lvlCount) {
             case 1:
                 document.body.style.backgroundColor = 'forestgreen';
-                for (let i = 0; i < Math.floor(Math.random() * 100 % 3 + lvlCount); i++) {
-                    new Enemy1().Create();
-                }
                 break;
             case 2:
                 document.body.style.backgroundColor = 'gray';
-                for (let i = 0; i < Math.floor(Math.random() * 100 % 4 +  lvlCount); i++) {
-                    new Enemy1().Create();
-                }
                 break;
             case 3:
                 document.body.style.backgroundColor = 'brown';
-                for (let i = 0; i < Math.floor(Math.random() * 100 % 5 + lvlCount); i++) {
-                    new Enemy1().Create();
-                }
                 break;
+        }
+
+        for (let i = 0; i < Math.floor(Math.random() * 100 % 5 + 2); i++) {
+            new Enemy1().Create();
         }
     }
 }
@@ -74,8 +66,8 @@ class Enemy1 {
     Create() {
         let PosX = "top: " + Math.floor(Math.random() * 100 % 50) + "%;";
         let PosY = "right: " + Math.floor(Math.random() * 100 % 50) + "%;";
-        let MoveSet = "EntityMoveSet" + Math.floor(Math.random() * 10 % 2 + 1);
-        let AnimData = "animation: " + Math.floor((Math.random() * 100 % 4) + 1) + "s " + MoveSet + " infinite alternate;";
+        let MoveSet = "EntityMoveSet" + Math.floor(Math.random() * 10 % 4 + 1);
+        let AnimData = "animation: " + Math.floor((Math.random() * 100 % 3) + 2) + "s " + MoveSet + " infinite alternate;";
 
         const enemyContainer = document.createElement('div');
         enemyContainer.classList.add('entityContainer');
@@ -105,9 +97,6 @@ class Enemy1 {
     }
 }
 
-
-
-
 function WeaponAnimCansel() {
     document.getElementById('weapon').src = 'w1.png';
 }
@@ -119,22 +108,22 @@ function WeaponAnim() {
 }
 
 
-document.body.addEventListener('keydown', function(event){
+document.body.addEventListener('keydown', function (event) {
     let shield = document.getElementById('shield');
-    if(event.key === 'Shift') {
-        shield.src='ws2.png';
-        shield.style.left='25%';
-        document.getElementById('weapon').hidden=true;
+    if (event.key === 'Shift') {
+        shield.src = 'ws2.png';
+        shield.style.left = '25%';
+        document.getElementById('weapon').hidden = true;
         shieldUp = true;
     }
 });
 
-document.body.addEventListener('keyup', function(event){
+document.body.addEventListener('keyup', function (event) {
     let shield = document.getElementById('shield');
-    if(event.key === 'Shift') {
-        shield.src='ws1.png';
-        shield.style.left='5%';
-        document.getElementById('weapon').hidden=false;
+    if (event.key === 'Shift') {
+        shield.src = 'ws1.png';
+        shield.style.left = '15%';
+        document.getElementById('weapon').hidden = false;
         shieldUp = false;
     }
 });

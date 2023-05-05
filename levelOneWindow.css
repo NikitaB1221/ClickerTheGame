@@ -43,15 +43,15 @@ body {
 .shield{
     position: absolute;
     bottom: 0%;
-    left: 5%;
+    left: 15%;
     z-index: 9;
 }
 
 .userHpBar{
     position: absolute;
     bottom: 1%;
-    right: calc(50% - 400px);
-    width: 400px; 
+    right: calc(50% - 300px);
+    width: 450px; 
     height: 40px;
     z-index: 9;
 }
@@ -101,5 +101,69 @@ body {
     {
         top: 10%;
         left: 45%; 
+    } 
+}
+
+@keyframes EntityMoveSet3 {
+    0%{
+        top: 70%;
+        right: 10%;
     }
+    20%{
+        top: 30%;
+        right: 26%;
+    }
+    40%{
+        top: 70%;
+        right: 42%;
+    }
+    60%{
+        top: 40%;
+        right: 58%;
+    }
+    80%{
+        top: 60%;
+        right: 74%;
+    }    
+    100%{
+        top: 30%;
+        right: 90%;
+    }
+}
+
+@keyframes EntityMoveSet4 {
+    0% {
+      top: 50%;
+      left: 10%;
+    }
+    25% {
+      top: 10%;
+      left: 50%;
+    }
+    50% {
+      top: 50%;
+      left: 90%;
+    }
+    75% {
+      top: 80%;
+      left: 50%;
+    }
+    100% {
+      top: 50%;
+      left: 10%;
+    }
+}
+
+
+
+
+@keyframes EntityMoveSet4 {
+0% {
+    top: var(--startY);
+    left: var(--startX);
+}
+100% {
+    top: var(--endY);
+    left: var(--endX);
+}
 }
