@@ -7,7 +7,7 @@ body {
     background-repeat: no-repeat;
     background-size: 100%;
     user-select: none;
-    cursor: url('cursore.png'), auto;
+    cursor: url(./cursore.png), auto;
 }
 
 .entityContainer {
@@ -90,12 +90,13 @@ body {
 
 .ScoresLabels{
     position: absolute; 
-    left: 5%; 
-    top: 20%; 
+    left: 2.5%; 
+    top: 7%; 
     width: 120px; 
     height: 100px;
     z-index: 9;
     display: flex;
+    color: azure;
     flex-direction: column;
 }
 
