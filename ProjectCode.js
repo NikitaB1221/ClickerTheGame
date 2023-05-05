@@ -25,11 +25,12 @@
         usenameTextArea.style.display = "none";
         playButton.style.display = "none";
         startWindow.style.display = "none";
-        //audio.volume = 0.010;
-        //audio.play();
+        audio.volume = 0.010;
+        audio.play();
 
         document.getElementById('weapon').hidden = false;
         document.getElementById('shield').hidden = false;
+        IsNewLevel();
     }
 
     document.getElementById('playButton').addEventListener('click', palyButtonClick);
@@ -282,5 +283,5 @@
         let tmpTimer = setTimeout(WeaponAnimCansel, 380);
     }
 
-    IsNewLevel();
+    
 }
