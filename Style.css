@@ -28,6 +28,14 @@ body {
     margin-top: 20px;
 }
 
+.Entity2{
+    position: absolute;
+    height: 250px;
+    width: 250px;
+    z-index: 2;
+    margin-top: 20px;
+}
+
 #weapon{
     position: absolute;
     bottom: 0%;
