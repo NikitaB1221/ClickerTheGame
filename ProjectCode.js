@@ -177,6 +177,15 @@
         IsNewLevel();
         SaveData();
 
+        const createAudio = () =>{
+            const au = new Audio('UserHit.mp3');
+            return au;
+        }
+        
+        document.getElementById('bt').addEventListener('click', () => {
+            createAudio().play();
+        });
+        
     }
 
     function RemoveRS() {
@@ -306,33 +315,33 @@
         let tmpTimer = setTimeout(WeaponAnimCansel, 380);
     }
 
-    if (localStorage.getItem('data').length !== 0 && localStorage.getItem('data').split(' ')[0]!=='undefined'){
-        let str = localStorage.getItem('data').split(' ').pop();
-        usenameTextArea.style.display = "none";
-        playButton.style.display = "none";
-        startWindow.style.display = "none";
+    // if (localStorage.getItem('data').length !== 0 && localStorage.getItem('data').split(' ')[0]!=='undefined'){
+    //     let str = localStorage.getItem('data').split(' ').pop();
+    //     usenameTextArea.style.display = "none";
+    //     playButton.style.display = "none";
+    //     startWindow.style.display = "none";
 
-        document.getElementById('weapon').hidden = false;
-        document.getElementById('shield').hidden = false;
+    //     document.getElementById('weapon').hidden = false;
+    //     document.getElementById('shield').hidden = false;
 
-        document.getElementById('userHpBar').value = localStorage.getItem('data').split(' ')[0];
-        document.getElementById('userStaminaBar').value = localStorage.getItem('data').split(' ')[1];
-        lvlCount = localStorage.getItem('data').split(' ')[2];
+    //     document.getElementById('userHpBar').value = localStorage.getItem('data').split(' ')[0];
+    //     document.getElementById('userStaminaBar').value = localStorage.getItem('data').split(' ')[1];
+    //     lvlCount = localStorage.getItem('data').split(' ')[2];
 
-        switch (lvlCount) {
-            case "1":
-                document.body.style.backgroundImage = 'url(bg1.jpg)';
-                break;
-            case "2":
-                document.body.style.backgroundImage = 'url(bg2.jpg)';
-                break;
-            case "3":
-                document.body.style.backgroundImage = 'url(bg3.png)';
-                break;
-        }
-        IsNewLevel();
-    }
-    else{
+    //     switch (lvlCount) {
+    //         case "1":
+    //             document.body.style.backgroundImage = 'url(bg1.jpg)';
+    //             break;
+    //         case "2":
+    //             document.body.style.backgroundImage = 'url(bg2.jpg)';
+    //             break;
+    //         case "3":
+    //             document.body.style.backgroundImage = 'url(bg3.png)';
+    //             break;
+    //     }
+    //     IsNewLevel();
+    // }
+    // else{
 
     const palyButtonClick = () => {
         if (usenameTextArea.value === "" || usenameTextArea.value === " ") {
@@ -357,5 +366,5 @@
 
     document.getElementById('playButton').addEventListener('click', palyButtonClick);
     }
-}
+//}
 
