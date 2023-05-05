@@ -24,7 +24,7 @@
 
         if (loose !== true) {
             console.log(data);
-            localStorage.setItem('data', data); 
+            //localStorage.setItem('data', data); 
         }       
     };
 
@@ -229,7 +229,7 @@
             for (let i = 0; i < enemyList.length; i++) {
                 enemyList[i].remove();
             }
-            localStorage.setItem('data', '');
+            //localStorage.setItem('data', '');
         }
         else SaveData();
     }
