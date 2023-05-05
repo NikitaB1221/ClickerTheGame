@@ -9,7 +9,7 @@
     let audio = document.getElementById('background-music');
     let loose = false;
 
-    localStorage.setItem('data', '100 100 1');
+    // localStorage.setItem('data', '100 100 1');
 
     document.getElementById('weapon').hidden = true;
     document.getElementById('shield').hidden = true;
