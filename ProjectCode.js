@@ -49,9 +49,9 @@
 
             lvlCount++;
             let hpRegen = 20;
-            if(document.getElementById('userHpBar').value < 50) hpRegen += 50-document.getElementById('userHpBar').value;
-            document.getElementById('userHpBar').value+=hpRegen;
-            document.getElementById('userStaminaBar').value=100;
+            if (document.getElementById('userHpBar').value < 50) hpRegen += 50 - document.getElementById('userHpBar').value;
+            document.getElementById('userHpBar').value += hpRegen;
+            document.getElementById('userStaminaBar').value = 100;
             if (lvlCount > 3) lvlCount = 1;
 
             switch (lvlCount) {
@@ -67,7 +67,7 @@
             }
 
             for (let i = 0; i < Math.floor(Math.random() * 100 % 3 + 4); i++) {
-                if((Math.floor(Math.random() * 10 % 6)) === 1) new Enemy2().Create();
+                if ((Math.floor(Math.random() * 10 % 6)) === 1) new Enemy2().Create();
                 else new Enemy1().Create();
             }
         }
@@ -180,14 +180,41 @@
     function EnemyDamage() {
         if (shieldUp === false) this.childNodes[0].setAttribute('value', this.childNodes[0].getAttribute('value') - 20);
         if (this.childNodes[0].getAttribute('value') < 1) {
-            if(this.childNodes[1].className === "Entity2") document.getElementById('userHpBar').value += 20;
-        this.remove();
+            if (this.childNodes[1].className === "Entity2") document.getElementById('userHpBar').value += 20;
+            this.remove();
         }
         IsNewLevel();
     }
 
+    function RemoveRS(){
+        for(let i = 0; i< document.body.getElementsByClassName('dmgScreen').length; i++){
+            document.body.getElementsByClassName('dmgScreen')[i].remove();
+        }
+    }
+
+    function RedScreen(){
+        const rScreen = document.createElement('img');
+        rScreen.style.height = '100%';
+        rScreen.style.width = "100%";
+        rScreen.style.backgroundImage = 'url(Damage.png)';
+        rScreen.style.position='absolute';
+        // rScreen.style = "top: 0%;";
+        // rScreen.style = "right: 0%;";
+        rScreen.className='dmgScreen';
+        rScreen.zIndex='25';
+        rScreen.style.opacity='0.4';
+
+        document.body.append(rScreen);
+        
+
+        let tmpTimer = setTimeout(RemoveRS, 400);
+    }
+
     function PlayerDamage(dmg) {
         document.getElementById('userHpBar').value-=Math.floor(dmg);
+
+        RedScreen();
+
         if(document.getElementById('userHpBar').value < 1) {
             loose = true;
             document.getElementById('weapon').hidden = true;
@@ -204,8 +231,8 @@
     }
 
     function ShieldDamage(dmg) {
-        document.getElementById('userStaminaBar').value-=dmg;
-        if(document.getElementById('userStaminaBar').value < 1) {
+        document.getElementById('userStaminaBar').value -= dmg;
+        if (document.getElementById('userStaminaBar').value < 1) {
             document.getElementById('userStaminaBar').value += 50;
             document.getElementById('userHpBar').value -= 20;
         }
@@ -214,7 +241,7 @@
     function AttackTime() {
         timer++;
 
-        if( document.getElementById('userStaminaBar').value < 100 && shieldUp === false)  document.getElementById('userStaminaBar').value += 5;
+        if (document.getElementById('userStaminaBar').value < 100 && shieldUp === false) document.getElementById('userStaminaBar').value += 5;
 
         let enemyList = document.body.querySelectorAll('.entityContainer');
         for (let i = 0; i < enemyList.length; i++) {
@@ -227,7 +254,7 @@
                     attackMarker.style.width = '300px';
                     attackMarker.style.backgroundImage = 'url(at1.png)';
                 }
-                else{
+                else {
                     attackMarker.style.height = '250px';
                     attackMarker.style.width = '250px';
                     attackMarker.style.backgroundImage = 'url(at2.png)';
@@ -243,8 +270,8 @@
             }
             else if (enemyList[i].getAttribute('atCd') % timer !== 0 && enemyList[i].childNodes[1].childNodes.length > 0) {
                 enemyList[i].childNodes[1].removeChild(enemyList[i].childNodes[1].lastChild);
-                if(shieldUp === false) PlayerDamage(enemyList[i].getAttribute('atDm'));
-                else(ShieldDamage(enemyList[i].getAttribute('atDm')/2));
+                if (shieldUp === false) PlayerDamage(enemyList[i].getAttribute('atDm'));
+                else (ShieldDamage(enemyList[i].getAttribute('atDm') / 2));
             }
         }
     }
@@ -266,7 +293,7 @@
 
     document.body.addEventListener('keyup', function (event) {
         let shield = document.getElementById('shield');
-        if (event.code === 'ShiftLeft'&& loose === false) {
+        if (event.code === 'ShiftLeft' && loose === false) {
             shield.src = 'ws1.png';
             shield.style.left = '5%';
             document.getElementById('weapon').hidden = false;
@@ -283,5 +310,5 @@
         let tmpTimer = setTimeout(WeaponAnimCansel, 380);
     }
 
-    
+
 }
