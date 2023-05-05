@@ -9,42 +9,33 @@
     let audio = document.getElementById('background-music');
     let loose = false;
 
+    localStorage.setItem('data', '100 100 1');
+
     document.getElementById('weapon').hidden = true;
     document.getElementById('shield').hidden = true;
 
+    
 
-    const palyButtonClick = () => {
-        if (usenameTextArea.value === "" || usenameTextArea.value === " ") {
-            alert("Username can't be empty!");
-            return;
-        }
-
-        username = usenameTextArea.value;
-        usenameTextArea.value = "";
-
-        usenameTextArea.style.display = "none";
-        playButton.style.display = "none";
-        startWindow.style.display = "none";
-        audio.volume = 0.010;
-        audio.play();
-
-        document.getElementById('weapon').hidden = false;
-        document.getElementById('shield').hidden = false;
-        IsNewLevel();
-    }
-
-    document.getElementById('playButton').addEventListener('click', palyButtonClick);
+    
 
 
-    const SaveResult = () => {
-        localStorage.setItem(username, score);
+    const SaveData = () => {
+        let data = document.getElementById('userHpBar').value + " " + document.getElementById('userStaminaBar').value + " " + lvlCount + " ";
+
+        if (loose !== true) {
+            console.log(data);
+            localStorage.setItem('data', data); 
+        }       
     };
 
     const attackTimer = setInterval(AttackTime, 1000);
+    //const saveTimer = setInterval(SaveData, 1000);
+
     document.body.addEventListener('click', WeaponAnim);
 
     // New level
     function IsNewLevel() {
+        SaveData();
         if (document.body.querySelectorAll('.entityContainer').length === 0 && loose === false) {
 
             lvlCount++;
@@ -184,50 +175,54 @@
             this.remove();
         }
         IsNewLevel();
+        SaveData();
+
     }
 
-    function RemoveRS(){
-        for(let i = 0; i< document.body.getElementsByClassName('dmgScreen').length; i++){
+    function RemoveRS() {
+        for (let i = 0; i < document.body.getElementsByClassName('dmgScreen').length; i++) {
             document.body.getElementsByClassName('dmgScreen')[i].remove();
         }
     }
 
-    function RedScreen(){
+    function RedScreen() {
         const rScreen = document.createElement('img');
         rScreen.style.height = '100%';
         rScreen.style.width = "100%";
         rScreen.style.backgroundImage = 'url(Damage.png)';
-        rScreen.style.position='absolute';
-        // rScreen.style = "top: 0%;";
-        // rScreen.style = "right: 0%;";
-        rScreen.className='dmgScreen';
-        rScreen.zIndex='25';
-        rScreen.style.opacity='0.4';
+        rScreen.style.position = 'absolute';
+        rScreen.className = 'dmgScreen';
+        rScreen.zIndex = '25';
+        rScreen.style.opacity = '0.4';
 
         document.body.append(rScreen);
-        
+
 
         let tmpTimer = setTimeout(RemoveRS, 400);
     }
 
     function PlayerDamage(dmg) {
-        document.getElementById('userHpBar').value-=Math.floor(dmg);
+        document.getElementById('userHpBar').value -= Math.floor(dmg);
+        
 
         RedScreen();
 
-        if(document.getElementById('userHpBar').value < 1) {
+        if (document.getElementById('userHpBar').value < 1) {
             loose = true;
             document.getElementById('weapon').hidden = true;
             document.getElementById('shield').hidden = true;
             document.getElementById('userStaminaBar').hidden = true;
             document.getElementById('userHpBar').hidden = true;
-            document.body.style.backgroundImage ='none';
-            document.body.style.backgroundColor ='black';
+            document.body.style.backgroundImage = 'none';
+            document.body.style.backgroundColor = 'black';
+            audio.pause();
             let enemyList = document.body.querySelectorAll('.entityContainer');
             for (let i = 0; i < enemyList.length; i++) {
                 enemyList[i].remove();
             }
+            localStorage.setItem('data', '');
         }
+        else SaveData();
     }
 
     function ShieldDamage(dmg) {
@@ -236,6 +231,7 @@
             document.getElementById('userStaminaBar').value += 50;
             document.getElementById('userHpBar').value -= 20;
         }
+        SaveData();
     }
 
     function AttackTime() {
@@ -310,5 +306,56 @@
         let tmpTimer = setTimeout(WeaponAnimCansel, 380);
     }
 
+    if (localStorage.getItem('data').length !== 0 && localStorage.getItem('data').split(' ')[0]!=='undefined'){
+        let str = localStorage.getItem('data').split(' ').pop();
+        usenameTextArea.style.display = "none";
+        playButton.style.display = "none";
+        startWindow.style.display = "none";
 
+        document.getElementById('weapon').hidden = false;
+        document.getElementById('shield').hidden = false;
+
+        document.getElementById('userHpBar').value = localStorage.getItem('data').split(' ')[0];
+        document.getElementById('userStaminaBar').value = localStorage.getItem('data').split(' ')[1];
+        lvlCount = localStorage.getItem('data').split(' ')[2];
+
+        switch (lvlCount) {
+            case "1":
+                document.body.style.backgroundImage = 'url(bg1.jpg)';
+                break;
+            case "2":
+                document.body.style.backgroundImage = 'url(bg2.jpg)';
+                break;
+            case "3":
+                document.body.style.backgroundImage = 'url(bg3.png)';
+                break;
+        }
+        IsNewLevel();
+    }
+    else{
+
+    const palyButtonClick = () => {
+        if (usenameTextArea.value === "" || usenameTextArea.value === " ") {
+            alert("Username can't be empty!");
+            return;
+        }
+
+        username = usenameTextArea.value;
+        usenameTextArea.value = "";
+
+        usenameTextArea.style.display = "none";
+        playButton.style.display = "none";
+        startWindow.style.display = "none";
+        audio.volume = 0.010;
+        audio.play();
+
+        document.getElementById('weapon').hidden = false;
+        document.getElementById('shield').hidden = false;
+
+        IsNewLevel();        
+    }
+
+    document.getElementById('playButton').addEventListener('click', palyButtonClick);
+    }
 }
+
