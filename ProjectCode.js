@@ -23,7 +23,8 @@ const palyButtonClick = () =>{
     audio.play();
 }
 
-document.getElementById('playButton').addEventListener('click',   palyButtonClick);
+// НЕ УДАЛЯТЬ
+//document.getElementById('playButton').addEventListener('click',   palyButtonClick);
 
 
 const SaveResult = () =>{
@@ -42,13 +43,13 @@ document.body.addEventListener('click', WeaponAnim);
     
             switch (lvlCount) {
                 case 1:
-                    document.body.style.backgroundColor = 'forestgreen';
+                    document.body.style.backgroundImage='url(bg1.jpg)';
                     break;
                 case 2:
-                    document.body.style.backgroundColor = 'gray';
+                    document.body.style.backgroundImage='url(bg2.jpg)';
                     break;
                 case 3:
-                    document.body.style.backgroundColor = 'brown';
+                    document.body.style.backgroundImage='url(bg3.png)';
                     break;
             }
     
