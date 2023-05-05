@@ -76,7 +76,22 @@
         }
     }
 
+    function Death() {
+        loose = true;
+        document.getElementById('weapon').hidden = true;
+        document.getElementById('shield').hidden = true;
+        document.getElementById('userStaminaBar').hidden = true;
+        document.getElementById('userHpBar').hidden = true;
+        document.body.style.backgroundImage ='none';
+        document.body.style.backgroundColor ='black';
 
+        audio.pause();
+
+        let enemyList = document.body.querySelectorAll('.entityContainer');
+        for (let i = 0; i < enemyList.length; i++) {
+            enemyList[i].remove();
+        }
+    }
 
 
     // Enemy spawn
@@ -185,7 +200,7 @@
             this.childNodes[0].setAttribute('value', this.childNodes[0].getAttribute('value') - 20);
 
             let UserAtack = new Audio('UserAtack.mp3');
-            UserAtack.volume = 0.020;
+            UserAtack.volume = 0.080;
             UserAtack.play();
         }
         if (this.childNodes[0].getAttribute('value') < 1) {
@@ -214,7 +229,7 @@
         document.body.append(rScreen);
 
         let UserGotHit = new Audio('UserHit.mp3');
-        UserGotHit.volume = 0.020;
+        UserGotHit.volume = 0.080;
         UserGotHit.play();
         
         setTimeout(RemoveRS, 400);
@@ -226,17 +241,7 @@
         RedScreen();
         
         if(document.getElementById('userHpBar').value < 1) {
-            loose = true;
-            document.getElementById('weapon').hidden = true;
-            document.getElementById('shield').hidden = true;
-            document.getElementById('userStaminaBar').hidden = true;
-            document.getElementById('userHpBar').hidden = true;
-            document.body.style.backgroundImage ='none';
-            document.body.style.backgroundColor ='black';
-            let enemyList = document.body.querySelectorAll('.entityContainer');
-            for (let i = 0; i < enemyList.length; i++) {
-                enemyList[i].remove();
-            }
+            Death();
         }
     }
 
@@ -244,13 +249,16 @@
         document.getElementById('userStaminaBar').value -= dmg;
 
         let ShieldBlock = new Audio('ShieldBlock.mp3');
-        ShieldBlock.volume = 0.020;
+        ShieldBlock.volume = 0.080;
         ShieldBlock.play();
 
         if (document.getElementById('userStaminaBar').value < 1) {
             RedScreen();
             document.getElementById('userStaminaBar').value += 50;
             document.getElementById('userHpBar').value -= 20;
+            if(document.getElementById('userHpBar').value < 1) {
+                Death();
+            }
         }
     }
 
@@ -299,7 +307,7 @@
     // Animations
     document.body.addEventListener('keydown', function (event) {
         let shield = document.getElementById('shield');
-        if (event.code === 'ShiftLeft' && loose === false) {
+        if ((event.code === 'ShiftLeft' || event.ctrlKey ) && loose === false) {
             shield.src = 'ws2.png';
             shield.style.left = '25%';
             document.getElementById('weapon').hidden = true;
@@ -309,7 +317,7 @@
 
     document.body.addEventListener('keyup', function (event) {
         let shield = document.getElementById('shield');
-        if (event.code === 'ShiftLeft' && loose === false) {
+        if ((event.code === 'ShiftLeft' || !event.ctrlKey)&& loose === false) {
             shield.src = 'ws1.png';
             shield.style.left = '5%';
             document.getElementById('weapon').hidden = false;
