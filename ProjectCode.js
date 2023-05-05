@@ -47,7 +47,9 @@
         if (document.body.querySelectorAll('.entityContainer').length === 0 && loose === false) {
 
             lvlCount++;
-            document.getElementById('userHpBar').value+=20;
+            let hpRegen = 20;
+            if(document.getElementById('userHpBar').value < 50) hpRegen += 50-document.getElementById('userHpBar').value;
+            document.getElementById('userHpBar').value+=hpRegen;
             document.getElementById('userStaminaBar').value=100;
             if (lvlCount > 3) lvlCount = 1;
 
@@ -176,16 +178,21 @@
     // Enemy attack
     function EnemyDamage() {
         if (shieldUp === false) this.childNodes[0].setAttribute('value', this.childNodes[0].getAttribute('value') - 20);
-        if (this.childNodes[0].getAttribute('value') < 1) this.remove();
+        if (this.childNodes[0].getAttribute('value') < 1) {
+            if(this.childNodes[1].className === "Entity2") document.getElementById('userHpBar').value += 20;
+        this.remove();
+        }
         IsNewLevel();
     }
 
     function PlayerDamage(dmg) {
-        document.getElementById('userHpBar').value-=dmg;
+        document.getElementById('userHpBar').value-=Math.floor(dmg);
         if(document.getElementById('userHpBar').value < 1) {
             loose = true;
             document.getElementById('weapon').hidden = true;
             document.getElementById('shield').hidden = true;
+            document.getElementById('userStaminaBar').hidden = true;
+            document.getElementById('userHpBar').hidden = true;
             document.body.style.backgroundImage ='none';
             document.body.style.backgroundColor ='black';
             let enemyList = document.body.querySelectorAll('.entityContainer');
