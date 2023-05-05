@@ -34,46 +34,40 @@ body {
     z-index: 10;
 }
 
-@keyframes EntityMoveSet1 {
-    0%{
-        top: 5%;
-        right: 15%;
-    }
-    33%
-    {
-        top: 30%;
-        right: 25%;
-    }
-    67%
-    {
-        top: 45%;
-        right: 10%;
-    }
-    100%
-    {
-        top: 80%;
-        right: 15%;
-    }
+#shield{
+    position: absolute;
+    bottom: 0%;
+    left: 5%;
+    z-index: 10;
 }
 
-@keyframes EntityMoveSet2 {
-    0%{
-        top: 80%;
-        left: 40%;
-    }
-    33%
-    {
-        top: 60%;
-        left: 35%;
-    }
-    67%
-    {
-        top: 40%;
-        right: 50%;
-    }
-    100%
-    {
-        top: 10%;
-        left: 45%; 
-    }
+.startWindow{
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    background-image: url(./start.png);
+    
+}
+
+.playButton{
+    position: absolute;
+    z-index: 10;
+    top: calc(50% - 6.5px);
+    left: calc(50% - 65.5px);
+    font-size: 178%;
+    padding: 10px 30px;
+    border-radius: 20px;
+}
+
+.usenameTextArea{
+    position: absolute;
+    z-index: 10;
+    font-size: 240%;
+    top: calc(50% - 60px);
+    left: calc(50% - 225px);
+    width: 450px;
+    height: 40px;
+    resize: none;
+    text-align: center;
 }
