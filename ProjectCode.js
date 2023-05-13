@@ -4,7 +4,6 @@
     let shieldUp = false;
     let animCount = 0;
     let username = ""
-    let score = 0;
     let playerDMG = 20;
     let lvlCount = 0;
     let audio = document.getElementById('background-music');
@@ -33,15 +32,13 @@
 
         document.getElementById('weapon').hidden = false;
         document.getElementById('shield').hidden = false;
+
         IsNewLevel();
     }
 
-    document.getElementById('playButton').addEventListener('click', palyButtonClick);
+    
 
 
-    const SaveResult = () => {
-        localStorage.setItem(username, score);
-    };
 
     const attackTimer = setInterval(AttackTime, 1000);
     document.body.addEventListener('click', WeaponAnim);
@@ -73,6 +70,8 @@
                 if ((Math.floor(Math.random() * 10 % 6)) === 1) new Enemy2().Create();
                 else new Enemy1().Create();
             }
+
+            SaveData();
         }
     }
 
@@ -84,6 +83,13 @@
         document.getElementById('userHpBar').hidden = true;
         document.body.style.backgroundImage ='none';
         document.body.style.backgroundColor ='black';
+
+        localStorage.setItem("isSave", false);
+        localStorage.setItem("enemy1", 0);
+        localStorage.setItem("enemy2", 0);
+        localStorage.setItem("levelNum", 1);
+        localStorage.setItem("usHp", 200);
+        localStorage.setItem("usSt", 100);
 
         audio.pause();
 
@@ -192,7 +198,66 @@
     }
 
 
+    if(localStorage.getItem("isSave") === 'true'){
+        LoadData();
 
+        usenameTextArea.style.display = "none";
+        playButton.style.display = "none";
+        startWindow.style.display = "none";
+        audio.volume = 0.010;
+        document.getElementById('weapon').hidden = false;
+        document.getElementById('shield').hidden = false;
+    }
+    else{
+        document.getElementById('playButton').addEventListener('click', palyButtonClick);
+    }
+
+    function SaveData(){
+        localStorage.setItem("isSave", true);
+
+        let enemyList = document.body.querySelectorAll('.entityContainer');
+        let en1 = 0;
+        let en2 = 0;
+
+        for (let i = 0; i < enemyList.length; i++) {
+            if(enemyList[i].childNodes[1].className === "Entity2") en2++;
+            else en1++;
+        }
+
+        localStorage.setItem("enemy1", en1);
+        localStorage.setItem("enemy2", en2);
+        localStorage.setItem("levelNum", lvlCount);
+        localStorage.setItem("usHp", document.getElementById('userHpBar').value);
+        localStorage.setItem("usSt", document.getElementById('userStaminaBar').value);
+    }
+
+    function LoadData(){
+        if(localStorage.getItem("isSave") === 'true'){
+            lvlCount = localStorage.getItem("levelNum");
+            document.getElementById('userHpBar').value = localStorage.getItem("usHp");
+            document.getElementById('userStaminaBar').value = localStorage.getItem("usSt");
+
+            switch (localStorage.getItem("levelNum")) {
+                case '1':
+                    document.body.style.backgroundImage = 'url(bg1.jpg)';
+                    break;
+                case '2':
+                    document.body.style.backgroundImage = 'url(bg2.jpg)';
+                    break;
+                case '3':
+                    document.body.style.backgroundImage = 'url(bg3.png)';
+                    break;
+            }
+
+            for (let i = 0; i < localStorage.getItem("enemy1"); i++) {
+                new Enemy1().Create();
+            }
+
+            for (let i = 0; i < localStorage.getItem("enemy2"); i++) {
+                new Enemy2().Create();
+            }
+        }
+    }
 
     // Enemy attack
     function EnemyDamage() {
@@ -208,6 +273,8 @@
             this.remove();
         }
         IsNewLevel();
+
+        SaveData();
     }
 
     function RemoveRS(){
@@ -236,13 +303,14 @@
     }
 
     function PlayerDamage(dmg) {
-        document.getElementById('userHpBar').value-=Math.floor(dmg);
+        document.getElementById('userHpBar').value -= Math.floor(dmg);
         
         RedScreen();
         
         if(document.getElementById('userHpBar').value < 1) {
             Death();
         }
+        else SaveData();
     }
 
     function ShieldDamage(dmg) {
@@ -317,7 +385,7 @@
 
     document.body.addEventListener('keyup', function (event) {
         let shield = document.getElementById('shield');
-        if ((event.code === 'ShiftLeft' || !event.ctrlKey)&& loose === false) {
+        if ((event.code === 'ShiftLeft' || !event.ctrlKey)&& loose === false && document.body.querySelectorAll('.entityContainer').length > 0) {
             shield.src = 'ws1.png';
             shield.style.left = '5%';
             document.getElementById('weapon').hidden = false;
@@ -334,5 +402,5 @@
         let tmpTimer = setTimeout(WeaponAnimCansel, 380);
     }
 
-
+    
 }
