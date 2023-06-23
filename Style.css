@@ -10,6 +10,11 @@ body {
     cursor: url(./cursore.png), auto;
 }
 
+body{
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 .entityContainer {
     position: absolute;
     display: flex;
